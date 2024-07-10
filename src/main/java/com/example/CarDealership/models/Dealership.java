@@ -15,7 +15,7 @@ public class Dealership {
 
     @Override
     public String toString() {
-        return this.dealershipId + ", " + name + ", " + address + ", " + phone;
+        return this.dealershipId + ", " + this.name + ", " + this. address + ", " + this.phone;
     }
 
     public int getDealershipId() {
