@@ -13,6 +13,11 @@ public class Dealership {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+        return this.dealershipId + ", " + name + ", " + address + ", " + phone;
+    }
+
     public int getDealershipId() {
         return dealershipId;
     }
