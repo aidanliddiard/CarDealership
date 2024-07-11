@@ -44,4 +44,13 @@ public class Dealership {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return String.format("\u001b[38;5;124m\nDealership:\u001b[0m %d," +
+                "\u001b[38;5;162m\nName:\u001b[0m %s" +
+                "\u001b[38;5;169m\nAddress:\u001b[0m %s" +
+                "\u001b[38;5;218m\nPhone:\u001b[0m %s",
+                this.dealershipId, this.name, this. address, this.phone);
+    }
 }

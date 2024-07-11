@@ -18,18 +18,18 @@ public class DealershipRepository {
     @Autowired
     private DataSource dataSource;
 
-    public List<Dealership> getAllDealerships(){
+    public List<Dealership> getAllDealerships() {
         String query = "SELECT * FROM dealerships";
         List<Dealership> dealerships = new ArrayList<>();
 
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery()){
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
 
-            while(rs.next()){
+            while (rs.next()) {
                 dealerships.add(mapRowToDealership(rs));
             }
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return dealerships;
