@@ -23,19 +23,6 @@ public class Vehicle {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return (this.vehicle_id + ", " +
-                this.vin + ", " +
-                this.sold + ", " +
-                this.color + ", " +
-                this.make + ", " +
-                this.model + ", " +
-                this.year + ", " +
-                this.miles + ", " +
-                this.price);
-    }
-
     public int getVehicle_id() {
         return vehicle_id;
     }
@@ -106,5 +93,25 @@ public class Vehicle {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\u001b[38;5;63m\nVehicle:\u001b[0m  %d," +
+                        " \u001b[38;5;32m\nVIN:\u001b[0m %s," +
+                        " \u001b[38;5;86m\nSold:\u001b[0m %b," +
+                        " \u001b[38;5;67m\nColor:\u001b[0m %s," +
+                        " \u001b[38;5;91m\nMake:\u001b[0m %s, Model:\u001b[0m %s," +
+                        " \u001b[38;5;133m\nYear:\u001b[0m %d, Miles:\u001b[0m %d," +
+                        " \u001b[38;5;147m\nPrice:\u001b[0m $ %.2f",
+                this.vehicle_id,
+                this.vin,
+                this.sold,
+                this.color,
+                this.make,
+                this.model,
+                this.year,
+                this.miles,
+                this.price);
     }
 }
