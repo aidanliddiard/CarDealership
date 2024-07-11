@@ -56,7 +56,7 @@ public class VehicleRepository {
         return vehicles;
     }
 
-    public List<Vehicle> getVehiclesBMakeModel(String make, String model) {
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         String query = "SELECT * FROM vehicles WHERE LOWER(vehicles.make) = ? AND LOWER(vehicles.model) = ?";
         List<Vehicle> vehicles = new ArrayList<>();
 
@@ -64,6 +64,87 @@ public class VehicleRepository {
              PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, make.toLowerCase());
             ps.setString(2, model.toLowerCase());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    vehicles.add(mapRowToVehicles(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByYearRange(double min, double max) {
+        String query = "SELECT * FROM vehicles WHERE year >= ? AND year <= ?";
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setDouble(1, min);
+            ps.setDouble(2, max);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    vehicles.add(mapRowToVehicles(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByColor(String color) {
+        String query = "SELECT * FROM vehicles WHERE LOWER(color) = ?";
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, color.toLowerCase());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    vehicles.add(mapRowToVehicles(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByMileageRange(double min, double max) {
+        String query = "SELECT * FROM vehicles WHERE miles >= ? AND miles <= ?";
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setDouble(1, min);
+            ps.setDouble(2, max);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    vehicles.add(mapRowToVehicles(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesNotSold() {
+        String query = "SELECT * FROM vehicles WHERE sold = false";
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
